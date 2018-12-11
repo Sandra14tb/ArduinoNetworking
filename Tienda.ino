@@ -33,7 +33,6 @@
   const int Trigger = 3;   //Pin digital 2 para el Trigger del sensor
   const int Echo = 4;   //Pin digital 3 para el Echo del sensor
   
-  
   //Definir el pin y el tipo de DHT para obtener la humedad y temperatura
   DHT dht(DHTPin, DHTTYPE);
   
