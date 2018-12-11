@@ -92,13 +92,13 @@
     }
   
     delay(200);
-    EthernetClient client = server.available();
-    if (client) {
+    EthernetClient client = server.available(); // Comprobamos si hay peticiones
+    if (client) {    // En caso afirmativo
       Serial.println("nuevo cliente");
       boolean currentLineIsBlank = true;
       while (client.connected()) {
-        if (client.available()) {
-          char c = client.read();
+        if (client.available()) { // Hay algo pendiente de leer
+          char c = client.read(); // Leemos los caracteres de uno en uno
           Serial.write(c);
           if (c == '\n' && currentLineIsBlank)
           {
@@ -107,7 +107,7 @@
             client.println("Connection: close");
             client.println("Refresh: 5");            // Actualizar cada 5 segs
             client.println();
-            client.println("<!DOCTYPE HTML>");
+            client.println("<!DOCTYPE HTML>");   // Envia la pagina Web
             client.println("<html>");
             Calculos();
             Serial.println(temperatura);
@@ -166,7 +166,7 @@
         }
       }
       delay(10);
-      client.stop();
+      client.stop(); // Cerrar conexion
       Serial.println("cliente desconectado");
   
       //Si se detecta que esta a menos de 7cm entonces imprime bienvenido en el LCD y se incrementa el contador
