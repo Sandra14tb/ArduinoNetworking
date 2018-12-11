@@ -5,7 +5,7 @@
   #include <Servo.h>
   
   byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-  IPAddress ip(192, 168, 137, 5); // vuestra IP
+  IPAddress ip(192, 168, 137, 5); // IP de nuestro equipo
   EthernetServer server(80);
   Servo microservo;
   
@@ -30,8 +30,8 @@
   
   //Definir el pin al que vamos a conectar el DHT11
   const int DHTPin = 2;
-  const int Trigger = 3;   //Pin digital 2 para el Trigger del sensor
-  const int Echo = 4;   //Pin digital 3 para el Echo del sensor
+  const int Trigger = 3;   
+  const int Echo = 4; 
   
   
   //Definir el pin y el tipo de DHT para obtener la humedad y temperatura
@@ -59,16 +59,16 @@
   
   
     Serial.begin(9600);//iniciailzamos la comunicación
-    pinMode(Trigger, OUTPUT); //pin como salida
-    pinMode(Echo, INPUT);  //pin como entrada
-    digitalWrite(Trigger, LOW);//Inicializamos el pin con 0
+    pinMode(Trigger, OUTPUT); 
+    pinMode(Echo, INPUT); 
+    digitalWrite(Trigger, LOW);
   
   
     dht.begin();
     Serial.begin(9600);
-    while (!Serial) ; // Retraso para el Leonardo
+    while (!Serial) ;
     Ethernet.begin(mac, ip);
-    server.begin();  // Inicia el servidor web
+    server.begin();
     Serial.print("Serv Web en la direccion: ");
     Serial.println(Ethernet.localIP());
   }
@@ -118,7 +118,7 @@
             client.print(temperatura);
             client.print(" grados Celsius</p>");
             client.print("<p>Humedad -  ");
-            client.print(humedad); // Aqui va la humedad
+            client.print(humedad);
             client.print(" porciento</p>");
             client.print(" Detector de incendios - ");
             client.print(llama);
@@ -195,13 +195,11 @@
     temperatura = dht.readTemperature();
   
     digitalWrite(Trigger, HIGH);
-    delayMicroseconds(10);          //Enviamos un pulso de 10us
+    delayMicroseconds(10);
     digitalWrite(Trigger, LOW);
   
-    t = pulseIn(Echo, HIGH); //obtenemos el ancho del pulso
-    d = t / 59;           //escalamos el tiempo a una distancia en cm
-  
-  
+    t = pulseIn(Echo, HIGH);
+    d = t / 59;
   
     //Obtener la temperatura y humedad con el DHT11
     llama = analogRead(A1);
