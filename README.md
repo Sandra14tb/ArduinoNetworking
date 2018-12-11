@@ -56,5 +56,19 @@ PROPÓSITO DE TIENDA
 <br>
   **Imágenes de local **
 ![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/imagen1.jpg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/Bienvenido.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/funcionalidad.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/funcionalidad2.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/imagen1.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/imagen2.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/imagen3.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/imagen4.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/mensaje.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/robo.jpeg?raw=true)
+![Local la Querendona](https://github.com/Sandra14tb/ArduinoNetworking/blob/master/simulado_bb.png?raw=true)
+
+
+
+
   
   
