@@ -78,14 +78,14 @@
     //Calcular el valor del reed switch
     value = digitalRead(reed);
   
-    if (value == LOW) {
+    if (value == LOW) { //Si se detecta algo por el reed switch, entonces suena el buzzer y se muestra en el LCD mensaje de alerta
       tone(buzzer, tono1);
       delay(200);
       tone(buzzer, tono2);
-      lcd.clear();
-      lcd.print("NOS ROBAN");
+      lcd.clear(); //Limpiar LCD
+      lcd.print("NOS ROBAN"); //Imprimir mensaje en LCD
       delay(2000);
-      lcd.clear();
+      lcd.clear(); //Regresar al nombre de la Tienda
       lcd.print("La querendona");
     } else {
       noTone(buzzer);
@@ -131,17 +131,17 @@
             client.println("<a href=\"/?button12off\"\"> Apagar El Otro LEd</a><br /> ");
             client.println("<br />");
   
-  
+             //Si se detecta que llama es menor igual a 20 entonces manda mensaje de alerta en la página y suena el buzzer
             if (llama <= 20) {
-              client.print("<p><font color='red'><h1>NOS QUEMAMOS</h1></font>");
-              tone(buzzer, tono1);
+              client.print("<p><font color='red'><h1>NOS QUEMAMOS</h1></font>"); //Mostrar alerta
+              tone(buzzer, tono1); //Sonar buzzer
               delay(200);
               tone(buzzer, tono2);
             } else {
               noTone(buzzer);
             }
   
-            client.print("Personas ingresadas:");
+            client.print("Personas ingresadas:"); //Imprimir el contador de las personas que ingresan a la tienda
             client.print(persona);
   
             client.print("<p><em> La pagina se actualiza cada 5 segundos.</em></p></body></html>");
@@ -149,7 +149,7 @@
           }
   
   
-  
+         
           if (readString.indexOf("?button12on") > 0) {
             digitalWrite(12, HIGH);
           }
@@ -169,16 +169,16 @@
       client.stop();
       Serial.println("cliente desconectado");
   
-  
+      //Si se detecta que esta a menos de 7cm entonces imprime bienvenido en el LCD y se incrementa el contador
       if (d <= 7) {
         lcd.clear();
-        lcd.print("Bienvenido");
+        lcd.print("Bienvenido"); //Mensaje para cuando alguien ingresa
         delay(2000);
         lcd.clear();
         lcd.print("La querendona");
-        persona = persona + 1;
+        persona = persona + 1; //Incrementar contador
       }
-      if (d <= 7) {
+      if (d <= 7) { //Movimiento del servo de ofertas
         microservo.write(0);
         delay(1000);
         microservo.write(40);
@@ -188,11 +188,11 @@
     }
   }
   
-  
+  //metodo para calcular la temperatura, humedad del DTH11
   void Calculos() {
   
-    humedad = dht.readHumidity();
-    temperatura = dht.readTemperature();
+    humedad = dht.readHumidity();//Calcular Humedad
+    temperatura = dht.readTemperature();//Calcular Temperatura
   
     digitalWrite(Trigger, HIGH);
     delayMicroseconds(10);          //Enviamos un pulso de 10us
@@ -212,21 +212,6 @@
       return;
     }
     Serial.println(llama);
-  
-  
-    if (readString.indexOf("?button2on") > 0) {
-      digitalWrite(0, HIGH);
-    }
-    if (readString.indexOf("?button2off") > 0) {
-      digitalWrite(0, LOW);
-    }
-  
-    if (readString.indexOf("?button3on") > 0) {
-      digitalWrite(1, HIGH);
-    }
-    if (readString.indexOf("?button3off") > 0) {
-      digitalWrite(1, LOW);
-    }
   
     delay(1000);
   }
