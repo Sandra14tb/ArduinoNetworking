@@ -1,13 +1,13 @@
-  #include <SPI.h>   // El shield Etherent usa SPI
-  #include <Ethernet.h>
-  #include "DHT.h"
-  #include <LiquidCrystal.h>
-  #include <Servo.h>
+  #include <SPI.h>   // El shield Ethernet usa SPI
+  #include <Ethernet.h> //Libreria de Ethernet
+  #include "DHT.h" //Libreria del sensor
+  #include <LiquidCrystal.h> //Libreria del LCD
+  #include <Servo.h> //Libreria del ServoMotor
   
-  byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-  IPAddress ip(192, 168, 137, 5); // IP de nuestro equipo
-  EthernetServer server(80);
-  Servo microservo;
+  byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED}; //Mac Address
+  IPAddress ip(192, 168, 137, 5); // IP estática
+  EthernetServer server(80); //Puerto
+  Servo microservo; //Declarar Servo
   
   //LCD
   const int rs = 5, en = 6, d4 = 7, d5 = 8, d6 = 9, d7 = 10;
@@ -21,17 +21,16 @@
   //Buzzer y reed switch
   #define reed 1
   #define buzzer 12
-  const int tono1 = 1000;
+  volatile int value = HIGH; //Valor del reed Switch
+  const int tono1 = 1000; //Tonos del buzzer
   const int tono2 = 1250;
-  volatile int value = HIGH;
-  const int buz = 12;
-  int persona = 0;
+  int persona = 0; //Contador para las personas que ingresan a la tienda
   
   
   //Definir el pin al que vamos a conectar el DHT11
   const int DHTPin = 2;
-  const int Trigger = 3;   
-  const int Echo = 4; 
+  const int Trigger = 3;   //Pin digital 2 para el Trigger del sensor
+  const int Echo = 4;   //Pin digital 3 para el Echo del sensor
   
   
   //Definir el pin y el tipo de DHT para obtener la humedad y temperatura
@@ -58,17 +57,17 @@
     pinMode(12, OUTPUT);
   
   
-    Serial.begin(9600);//iniciailzamos la comunicación
-    pinMode(Trigger, OUTPUT); 
-    pinMode(Echo, INPUT); 
-    digitalWrite(Trigger, LOW);
+    Serial.begin(9600);//inicializamos la comunicación
+    pinMode(Trigger, OUTPUT); //pin como salida
+    pinMode(Echo, INPUT);  //pin como entrada
+    digitalWrite(Trigger, LOW);//Inicializamos el pin con 0
   
   
-    dht.begin();
+    dht.begin(); //Inicializar el dht
     Serial.begin(9600);
-    while (!Serial) ;
+    while (!Serial) ; // Retraso para el Leonardo
     Ethernet.begin(mac, ip);
-    server.begin();
+    server.begin();  // Inicia el servidor web
     Serial.print("Serv Web en la direccion: ");
     Serial.println(Ethernet.localIP());
   }
@@ -76,6 +75,7 @@
   
   
   void loop() {
+    //Calcular el valor del reed switch
     value = digitalRead(reed);
   
     if (value == LOW) {
@@ -118,7 +118,7 @@
             client.print(temperatura);
             client.print(" grados Celsius</p>");
             client.print("<p>Humedad -  ");
-            client.print(humedad);
+            client.print(humedad); // Aqui va la humedad
             client.print(" porciento</p>");
             client.print(" Detector de incendios - ");
             client.print(llama);
@@ -195,11 +195,13 @@
     temperatura = dht.readTemperature();
   
     digitalWrite(Trigger, HIGH);
-    delayMicroseconds(10);
+    delayMicroseconds(10);          //Enviamos un pulso de 10us
     digitalWrite(Trigger, LOW);
   
-    t = pulseIn(Echo, HIGH);
-    d = t / 59;
+    t = pulseIn(Echo, HIGH); //obtenemos el ancho del pulso
+    d = t / 59;           //escalamos el tiempo a una distancia en cm
+  
+  
   
     //Obtener la temperatura y humedad con el DHT11
     llama = analogRead(A1);
