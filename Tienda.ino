@@ -27,7 +27,6 @@
   const int buz = 12;
   int persona = 0;
   
-  
   //Definir el pin al que vamos a conectar el DHT11
   const int DHTPin = 2;
   const int Trigger = 3;   //Pin digital 2 para el Trigger del sensor
